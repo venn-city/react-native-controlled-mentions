@@ -47,10 +47,10 @@ test('generates regex result part', () => {
   const mentionData = {original: mentionValue, trigger: mentionPartType.trigger, ...users[1]};
   const mentionPart = generateMentionPart(mentionPartType, mentionData);
   expect(mentionPart).toEqual<Part>({
-    text: '@Mary',
+    text: 'Mary',
     partType: mentionPartType,
     data: mentionData,
-    position: {start: 0, end: '@Mary'.length},
+    position: {start: 0, end: 'Mary'.length},
   });
 });
 
@@ -92,14 +92,14 @@ test('generates correct parts', () => {
   const mentionValue = '@[David](1:@)';
   const expectedMentionPart = {
     partType: mentionPartType,
-    text: '@David',
+    text: 'David',
     data: {
       id: '1:@',
       name: 'David',
       trigger: '@',
       original: '@[David](1:@)',
     },
-    position: {start: 0, end: 6},
+    position: {start: 0, end: 5},
   };
 
   let {parts} = parseValue(mentionValue, [mentionPartType]);
@@ -110,7 +110,7 @@ test('generates correct parts', () => {
 
   expect(parts).toEqual<Part[]>([
     expectedMentionPart,
-    {text: ' hey!', position: {start: 6, end: 11}},
+    {text: ' hey!', position: {start: 5, end: 10}},
   ]);
 
 });
